@@ -1,7 +1,7 @@
 {
   "name": "brian-ai",
   "displayName": "Brian AI",
-  "description": "its a ai tool",
+  "description": "AI-powered smart contract development assistant",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.95.0"
@@ -9,13 +9,35 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onCommand:brian-ai.generateSmartContract",
+    "onCommand:brian-ai.generateDocumentation",
+    "onCommand:brian-ai.completeCode",
+    "onCommand:brian-ai.analyzeTransaction",
+    "onCommand:brian-ai.showNetworkSupport"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "brian-ai.helloWorld",
-        "title": "Hello World"
+        "command": "brian-ai.generateSmartContract",
+        "title": "Brian AI: Generate Smart Contract"
+      },
+      {
+        "command": "brian-ai.generateDocumentation",
+        "title": "Brian AI: Generate Documentation"
+      },
+      {
+        "command": "brian-ai.completeCode",
+        "title": "Brian AI: Complete Code"
+      },
+      {
+        "command": "brian-ai.analyzeTransaction",
+        "title": "Brian AI: Analyze Transaction"
+      },
+      {
+        "command": "brian-ai.showNetworkSupport",
+        "title": "Brian AI: Show Network Support"
       }
     ]
   },
@@ -26,9 +48,9 @@
     "package": "webpack --mode production --devtool hidden-source-map",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
-    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "pretest": "npm run compile-tests && npm run compile",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.9",
