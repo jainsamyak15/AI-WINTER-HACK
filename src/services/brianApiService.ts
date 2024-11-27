@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import { BrianApiResponse, BrianApiError } from '../utils/types';
 
 export class BrianAPIService {
-    private readonly baseUrl = 'https://api.brianknows.org/api/v0';
+    private readonly baseUrl = 'https://api.brianknows.org/api/v0/agent';
     private apiKey: string;
     private http!: AxiosInstance;
 

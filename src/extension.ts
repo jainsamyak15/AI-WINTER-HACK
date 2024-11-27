@@ -1,4 +1,3 @@
-// src/extension.ts
 import * as vscode from 'vscode';
 import { BrianAPIService } from './services/brianApiService';
 import { SmartContractProvider } from './providers/smartContractProvider';
@@ -9,6 +8,20 @@ import { NetworkSupportProvider } from './providers/networkSupportProvider';
 
 export async function activate(context: vscode.ExtensionContext) {
     const brianApiService = new BrianAPIService(context.globalState);
+    
+    // Add API key command
+    const setApiKeyCommand = vscode.commands.registerCommand('brian-ai.setApiKey', async () => {
+        const apiKey = await vscode.window.showInputBox({
+            prompt: 'Enter your Brian AI API Key',
+            password: true
+        });
+        if (apiKey) {
+            await brianApiService.setApiKey(apiKey);
+            vscode.window.showInformationMessage('Brian AI API Key set successfully!');
+        }
+    });
+    context.subscriptions.push(setApiKeyCommand);
+
     const smartContractProvider = new SmartContractProvider(brianApiService);
     const documentationProvider = new DocumentationProvider(brianApiService);
     const codeCompletionProvider = new CodeCompletionProvider(brianApiService);

@@ -10,6 +10,7 @@
     "Other"
   ],
   "activationEvents": [
+    "onCommand:brian-ai.setApiKey",
     "onCommand:brian-ai.generateSmartContract",
     "onCommand:brian-ai.generateDocumentation",
     "onCommand:brian-ai.completeCode",
@@ -19,6 +20,10 @@
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
+      {
+        "command": "brian-ai.setApiKey",
+        "title": "Brian AI: Set API Key"
+      },
       {
         "command": "brian-ai.generateSmartContract",
         "title": "Brian AI: Generate Smart Contract"
@@ -50,7 +55,8 @@
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile",
     "lint": "eslint src",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "dev": "webpack --watch"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.9",
