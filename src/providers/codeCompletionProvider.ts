@@ -28,7 +28,11 @@ export class CodeCompletionProvider {
                 );
 
                 editor.edit(editBuilder => {
-                    editBuilder.insert(position, completion.response);
+                    if (completion.response) {
+                        editBuilder.insert(position, completion.response);
+                    } else {
+                        vscode.window.showErrorMessage('No completion response received');
+                    }
                 });
             });
         } catch (error) {

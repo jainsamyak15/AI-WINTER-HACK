@@ -26,11 +26,15 @@ export class DocumentationProvider {
                 cancellable: false
             }, async () => {
                 const knowledge = await this.brianApiService.getKnowledge(prompt);
-                const documentation = this.formatDocumentation(knowledge.response);
-                
-                editor.edit(editBuilder => {
-                    editBuilder.insert(editor.selection.start, documentation);
-                });
+                if (knowledge.response) {
+                    const documentation = this.formatDocumentation(knowledge.response);
+                    
+                    editor.edit(editBuilder => {
+                        editBuilder.insert(editor.selection.start, documentation);
+                    });
+                } else {
+                    vscode.window.showErrorMessage('No documentation response received');
+                }
             });
         } catch (error) {
             const errorMessage = (error as Error).message;
